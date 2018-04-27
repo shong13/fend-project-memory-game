@@ -1,7 +1,9 @@
 /*
  * Create a list that holds all of your cards
  */
-let cardsFace = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-anchor', 'fa-leaf', 'fa-bicycle', 'fa-diamond', 'fa-bomb', 'fa-leaf', 'fa-bomb', 'fa-bolt', 'fa-bicycle', 'fa-paper-plane-o', 'fa-cube'];
+let cardsFace = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 
+'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 
+'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
 
 
 
@@ -27,6 +29,16 @@ function shuffle(array) {
     return array;
 }
 
+cardsFace = shuffle(cardsFace);
+
+let newDeck = document.querySelectorAll('.deck li');
+
+for(let i = 0; i < newDeck.length; i++){
+	newDeck[i].addEventListener('click',function(){
+		newDeck[i].className = 'card open show';
+	})
+	newDeck[i].firstElementChild.className = cardsFace[i];
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
