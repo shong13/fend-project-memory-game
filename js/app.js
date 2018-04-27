@@ -6,8 +6,8 @@ let cardsFace = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-
 'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
 
 let matchCheck = [];
-let prevCard = 0;
-
+let newDeck = document.querySelectorAll('.deck li');
+const restart = document.querySelector('.restart');
 
 /*
  * Display the cards on the page
@@ -33,7 +33,7 @@ function shuffle(array) {
 
 cardsFace = shuffle(cardsFace);
 
-let newDeck = document.querySelectorAll('.deck li');
+
 /*
 function checkCards(array){
 	for(let i = 0; i < array.length; i++){
@@ -43,6 +43,7 @@ function checkCards(array){
 	}
 }
 */
+//card logic
 for(let i = 0; i < newDeck.length; i++){
 	newDeck[i].firstElementChild.className = cardsFace[i];
 	newDeck[i].addEventListener('click',function(){
@@ -63,8 +64,20 @@ for(let i = 0; i < newDeck.length; i++){
 			}
 		}
 
-	})
+	});
 }
+
+
+//restart logic
+restart.addEventListener('click',function(){
+	cardsFace = shuffle(cardsFace);
+	for(let i = 0; i < newDeck.length; i++){
+		newDeck[i].firstElementChild.className = cardsFace[i];
+		newDeck[i].className = 'card';
+	}
+});
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
