@@ -5,8 +5,8 @@ let cardsFace = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-
 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 
 'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
 
-let matchCeck = [];
-
+let matchCheck = [];
+let prevCard = 0;
 
 
 /*
@@ -48,7 +48,21 @@ for(let i = 0; i < newDeck.length; i++){
 	newDeck[i].addEventListener('click',function(){
 		if(newDeck[i].className === 'card'){
 			newDeck[i].className = 'card open show';
+			matchCheck.push(newDeck[i].firstElementChild);
 		}
+		if(matchCheck.length === 2){
+			if(matchCheck[0].className === matchCheck[1].className){
+				matchCheck[0].parentElement.className = 'card match';
+				matchCheck[1].parentElement.className = 'card match';
+				matchCheck = [];
+			}
+			else{
+				matchCheck[0].parentElement.className = 'card';
+				matchCheck[1].parentElement.className = 'card';
+				matchCheck = [];
+			}
+		}
+
 	})
 }
 
