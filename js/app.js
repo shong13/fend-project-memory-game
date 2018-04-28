@@ -9,6 +9,8 @@ let matchCheck = [];
 let newDeck = document.querySelectorAll('.deck li');
 let moveCount = document.querySelector('.moves');
 let matchCounter = 0;
+let secondCounter = document.querySelector('.second');
+let minuteCounter = document.querySelector('.minute');
 const restart = document.querySelector('.restart');
 
 /*
@@ -33,6 +35,15 @@ function shuffle(array) {
     return array;
 }
 
+function startTimer(){
+	secondCounter.innerText++;
+	if(secondCounter.innerText === "60"){
+		minuteCounter.innerText++;
+		secondCounter.innerText = 0;
+	}
+}
+
+let timerId = setInterval(startTimer, 1000);
 cardsFace = shuffle(cardsFace);
 
 //card logic
@@ -74,6 +85,9 @@ restart.addEventListener('click',function(){
 		newDeck[i].className = 'card';
 	}
 	moveCount.innerText = 0;
+	clearInterval(timerId);
+	secondCounter.innerText = 0;
+	minuteCounter.innerText = 0;
 });
 
 
