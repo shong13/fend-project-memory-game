@@ -8,6 +8,7 @@ let cardsFace = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-
 let matchCheck = [];
 let newDeck = document.querySelectorAll('.deck li');
 let moveCount = document.querySelector('.moves');
+let matchCounter = 0;
 const restart = document.querySelector('.restart');
 
 /*
@@ -49,6 +50,10 @@ for(let i = 0; i < newDeck.length; i++){
 				matchCheck[0].parentElement.className = 'card match';
 				matchCheck[1].parentElement.className = 'card match';
 				matchCheck = []; //empty out the array
+				matchCounter++;
+				if(matchCounter === 8){
+					alert("you won");
+				}
 			}
 			else{
 				matchCheck[0].parentElement.className = 'card';
@@ -56,9 +61,9 @@ for(let i = 0; i < newDeck.length; i++){
 				matchCheck = []; //empty out the array
 			}
 		}
-
 	});
 }
+
 
 
 //restart logic
