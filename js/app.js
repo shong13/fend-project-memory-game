@@ -7,6 +7,7 @@ let cardsFace = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-
 
 let matchCheck = [];
 let newDeck = document.querySelectorAll('.deck li');
+let moveCount = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 
 /*
@@ -33,16 +34,6 @@ function shuffle(array) {
 
 cardsFace = shuffle(cardsFace);
 
-
-/*
-function checkCards(array){
-	for(let i = 0; i < array.length; i++){
-		if(array[i].className === 'card'){
-			array[i].className = 'card open show';
-		}
-	}
-}
-*/
 //card logic
 for(let i = 0; i < newDeck.length; i++){
 	newDeck[i].firstElementChild.className = cardsFace[i];
@@ -50,17 +41,19 @@ for(let i = 0; i < newDeck.length; i++){
 		if(newDeck[i].className === 'card'){
 			newDeck[i].className = 'card open show';
 			matchCheck.push(newDeck[i].firstElementChild);
+			moveCount.innerText++;
 		}
+		//check 2 cards in the queue for match
 		if(matchCheck.length === 2){
-			if(matchCheck[0].className === matchCheck[1].className){
+			if(matchCheck[0].className === matchCheck[1].className){    
 				matchCheck[0].parentElement.className = 'card match';
 				matchCheck[1].parentElement.className = 'card match';
-				matchCheck = [];
+				matchCheck = []; //empty out the array
 			}
 			else{
 				matchCheck[0].parentElement.className = 'card';
 				matchCheck[1].parentElement.className = 'card';
-				matchCheck = [];
+				matchCheck = []; //empty out the array
 			}
 		}
 
@@ -75,6 +68,7 @@ restart.addEventListener('click',function(){
 		newDeck[i].firstElementChild.className = cardsFace[i];
 		newDeck[i].className = 'card';
 	}
+	moveCount.innerText = 0;
 });
 
 
