@@ -12,8 +12,13 @@ let matchCounter = 0;
 let secondCounter = document.querySelector('.second');
 let minuteCounter = document.querySelector('.minute');
 const restart = document.querySelector('.restart');
+const testing1 = document.querySelector('.deck');
 
-
+testing1.addEventListener('click', function(e) {
+	if(e.target && e.target.nodeName == 'LI'){
+		e.target.className = 'card open show';
+	}
+});
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -48,7 +53,7 @@ let timerId = setInterval(startTimer, 1000); //id for clearInterval and sets int
 cardsFace = shuffle(cardsFace);
 
 //card logic
-
+/*
 for(let i = 0; i < newDeck.length; i++){
 	newDeck[i].firstElementChild.className = cardsFace[i];
 	newDeck[i].addEventListener('click',function(){
@@ -76,7 +81,7 @@ for(let i = 0; i < newDeck.length; i++){
 		}
 	});
 }
-
+*/
 function deckShuffle(cardList, deckArray){
 	cardList = shuffle(cardList);
 	for(let i = 0; i < deckArray.length; i++){
