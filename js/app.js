@@ -13,6 +13,7 @@ let secondCounter = document.querySelector('.second');
 let minuteCounter = document.querySelector('.minute');
 const restart = document.querySelector('.restart');
 
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -34,7 +35,7 @@ function shuffle(array) {
 
     return array;
 }
-
+//timer logic
 function startTimer(){
 	secondCounter.innerText++;
 	if(secondCounter.innerText === "60"){
@@ -43,10 +44,11 @@ function startTimer(){
 	}
 }
 
-let timerId = setInterval(startTimer, 1000);
+let timerId = setInterval(startTimer, 1000); //id for clearInterval and sets interval to 1 second
 cardsFace = shuffle(cardsFace);
 
 //card logic
+
 for(let i = 0; i < newDeck.length; i++){
 	newDeck[i].firstElementChild.className = cardsFace[i];
 	newDeck[i].addEventListener('click',function(){
@@ -75,16 +77,21 @@ for(let i = 0; i < newDeck.length; i++){
 	});
 }
 
+function deckShuffle(cardList, deckArray){
+	cardList = shuffle(cardList);
+	for(let i = 0; i < deckArray.length; i++){
+		deckArray[i].firstElementChild.className = cardList[i];
+		deckArray[i].className = 'card';
+	}
+}
+	
 
 
 //restart logic
 restart.addEventListener('click',function(){
-	cardsFace = shuffle(cardsFace);
-	for(let i = 0; i < newDeck.length; i++){
-		newDeck[i].firstElementChild.className = cardsFace[i];
-		newDeck[i].className = 'card';
-	}
+	deckShuffle(cardsFace, newDeck)
 	moveCount.innerText = 0;
+	//timer logic
 	clearInterval(timerId);
 	secondCounter.innerText = 0;
 	minuteCounter.innerText = 0;
