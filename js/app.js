@@ -15,13 +15,19 @@ const restart = document.querySelector('.restart');
 const testing1 = document.querySelector('.deck');
 
 function flipCard(card){                  //flip card function
-	if(card.target && card.target.nodeName == 'LI'){
-		card.target.className = 'card open show';
-	}
+	card.target.className = 'card open show';
 }
 
-testing1.addEventListener('click', function(evt) { 
-	flipCard(evt);
+function addCardToList(card, list){       //adding card to the list function
+	list.push(card.target.firstElementChild.className);
+}
+
+
+testing1.addEventListener('click', function(card) { 
+	if(card.target && card.target.nodeName == 'LI'){
+		flipCard(card);
+		addCardToList(card, matchCheck);
+	}
 });
 /*
  * Display the cards on the page
