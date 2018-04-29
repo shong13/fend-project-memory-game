@@ -14,10 +14,14 @@ let minuteCounter = document.querySelector('.minute');
 const restart = document.querySelector('.restart');
 const testing1 = document.querySelector('.deck');
 
-testing1.addEventListener('click', function(e) {
-	if(e.target && e.target.nodeName == 'LI'){
-		e.target.className = 'card open show';
+function flipCard(card){                  //flip card function
+	if(card.target && card.target.nodeName == 'LI'){
+		card.target.className = 'card open show';
 	}
+}
+
+testing1.addEventListener('click', function(evt) { 
+	flipCard(evt);
 });
 /*
  * Display the cards on the page
