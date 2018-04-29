@@ -22,22 +22,34 @@ function addCardToList(card, list){       //adding card to the list function
 	list.push(card.target.firstElementChild);
 }
 
-function cardsMatch(card, list){
-	if(list.length == 2 && list[0].className === list[1].className){
-		list[0].parentElement.className = 'card match';
-		list[1].parentElement.className = 'card match';
-		list.pop();
-		list.pop();
+function cardsMatch(card, list, moveCounter){
+	if(list.length === 2 && list[0].className === list[1].className){
+		while(list.length > 0){
+			list.pop().parentElement.className = 'card match';
+		}
+		moveCounter.innerText++;
 	}
 }
+
+function cardsNotMatch(card, list, moveCounter){
+	if(list.length === 2 && list[0].className !== list[1].className){
+		while(list.length > 0){
+			list.pop().parentElement.className = 'card';
+		}
+		moveCounter.innerText++;
+	}
+}
+
 
 testing1.addEventListener('click', function(card) { 
 	if(card.target && card.target.nodeName == 'LI'){
 		flipCard(card);
 		addCardToList(card, matchCheck);
-		cardsMatch(card, matchCheck);
+		setTimeout(cardsMatch, 200, card, matchCheck, moveCount);
+		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
 	}
 });
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
