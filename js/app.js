@@ -28,6 +28,7 @@ function cardsMatch(card, list, moveCounter){
 			list.pop().parentElement.className = 'card match';
 		}
 		moveCounter.innerText++;
+		matchCounter++;
 	}
 }
 
@@ -40,14 +41,21 @@ function cardsNotMatch(card, list, moveCounter){
 	}
 }
 
+function endGame(){
+	if(matchCounter === 8){
+		alert("You won!");
+	}
+}
 
 testing1.addEventListener('click', function(card) { 
 	if(card.target && card.target.nodeName == 'LI'){
 		flipCard(card);
 		addCardToList(card, matchCheck);
-		setTimeout(cardsMatch, 200, card, matchCheck, moveCount);
+		setTimeout(cardsMatch, 200, card, matchCheck, moveCount, matchCounter);
 		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
+		
 	}
+	setTimeout(endGame, 500);
 });
 
 /*
