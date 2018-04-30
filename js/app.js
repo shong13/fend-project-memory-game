@@ -83,36 +83,6 @@ function startTimer(){
 let timerId = setInterval(startTimer, 1000); //id for clearInterval and sets interval to 1 second
 cardsFace = shuffle(cardsFace);
 
-//card logic
-/*
-for(let i = 0; i < newDeck.length; i++){
-	newDeck[i].firstElementChild.className = cardsFace[i];
-	newDeck[i].addEventListener('click',function(){
-		if(newDeck[i].className === 'card'){
-			newDeck[i].className = 'card open show';
-			matchCheck.push(newDeck[i].firstElementChild);
-			moveCount.innerText++;
-		}
-		//check 2 cards in the queue for match
-		if(matchCheck.length === 2){
-			if(matchCheck[0].className === matchCheck[1].className){    
-				matchCheck[0].parentElement.className = 'card match';
-				matchCheck[1].parentElement.className = 'card match';
-				matchCheck = []; //empty out the array
-				matchCounter++;
-				if(matchCounter === 8){
-					alert("you won");
-				}
-			}
-			else{
-				matchCheck[0].parentElement.className = 'card';
-				matchCheck[1].parentElement.className = 'card';
-				matchCheck = []; //empty out the array
-			}
-		}
-	});
-}
-*/
 function deckShuffle(cardList, deckArray){
 	cardList = shuffle(cardList);
 	for(let i = 0; i < deckArray.length; i++){
