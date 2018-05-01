@@ -59,15 +59,11 @@ testing1.addEventListener('click', function(card) {
 	if(card.target && card.target.className === 'card'){
 		flipCard(card);
 		addCardToList(card, matchCheck);
-		
 		cardsMatch(card, matchCheck, moveCount);
 		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
 		tooManyCardsBugFix(matchCheck);
 		setTimeout(endGame,500);
-		
-		
 	}
-	
 });
 
 /*
