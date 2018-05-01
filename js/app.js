@@ -38,7 +38,7 @@ function cardsNotMatch(card, list, moveCounter){
 			list.pop().parentElement.className = 'card';
 		}
 		moveCounter.innerText++;
-	}
+	}	
 }
 
 function endGame(){
@@ -47,15 +47,27 @@ function endGame(){
 	}
 }
 
+function tooManyCardsBugFix(list){//test function to fix a bug where cards are clicked too fast
+	if(list.length > 2){
+		while(list.length > 0){
+			list.pop().parentElement.className = 'card';
+		}
+	}
+}
+
 testing1.addEventListener('click', function(card) { 
-	if(card.target && card.target.nodeName == 'LI'){
+	if(card.target && card.target.className === 'card'){
 		flipCard(card);
 		addCardToList(card, matchCheck);
-		setTimeout(cardsMatch, 200, card, matchCheck, moveCount, matchCounter);
+		
+		cardsMatch(card, matchCheck, moveCount);
 		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
+		tooManyCardsBugFix(matchCheck);
+		setTimeout(endGame,500);
+		
 		
 	}
-	setTimeout(endGame, 500);
+	
 });
 
 /*
