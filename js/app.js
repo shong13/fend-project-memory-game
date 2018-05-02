@@ -44,6 +44,7 @@ function cardsNotMatch(card, list, moveCounter){
 function endGame(){
 	if(matchCounter === 8){
 		alert("You won!");
+		clearInterval(timerId);
 	}
 }
 
@@ -62,7 +63,7 @@ testing1.addEventListener('click', function(card) {
 		cardsMatch(card, matchCheck, moveCount);
 		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
 		tooManyCardsBugFix(matchCheck);
-		setTimeout(endGame,500);
+		setTimeout(endGame, 100);
 	}
 });
 
@@ -97,8 +98,8 @@ function startTimer(){
 }
 
 let timerId = setInterval(startTimer, 1000); //id for clearInterval and sets interval to 1 second
-cardsFace = shuffle(cardsFace);
-
+deckShuffle(cardsFace, newDeck);
+ 
 function deckShuffle(cardList, deckArray){
 	cardList = shuffle(cardList);
 	for(let i = 0; i < deckArray.length; i++){
@@ -113,8 +114,8 @@ function deckShuffle(cardList, deckArray){
 restart.addEventListener('click',function(){
 	deckShuffle(cardsFace, newDeck)
 	moveCount.innerText = 0;
+	matchCounter = 0;
 	//timer logic
-	clearInterval(timerId);
 	secondCounter.innerText = 0;
 	minuteCounter.innerText = 0;
 });
