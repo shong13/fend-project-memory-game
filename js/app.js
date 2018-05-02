@@ -132,3 +132,22 @@ restart.addEventListener('click',function(){
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ //testing modal
+ const modal = document.querySelector('.modal');
+ const span = document.querySelector('.close');
+ const x = document.getElementById("myBtn");
+ x.addEventListener('click',function(){
+	 modal.style.display = "block";
+ });
+ 
+ span.addEventListener('click',function(){
+	 modal.style.display = "none";
+ });
+ 
+ window.addEventListener('click',function(event){
+	 if(event.target == modal) {
+		 modal.style.display = "none";
+	 }
+ });
+ //testing modal
