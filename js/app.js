@@ -111,15 +111,24 @@ function deckShuffle(cardList, deckArray){
 
 
 //restart logic
-restart.addEventListener('click',function(){
-	deckShuffle(cardsFace, newDeck)
+restart.addEventListener('click', playAgain);
+	/*
+	deckShuffle(cardsFace, newDeck);
 	moveCount.innerText = 0;
 	matchCounter = 0;
 	//timer logic
 	secondCounter.innerText = 0;
 	minuteCounter.innerText = 0;
-});
+	*/
 
+
+function playAgain(){
+	deckShuffle(cardsFace, newDeck);
+	moveCount.innerText = 0;
+	matchCounter = 0;
+	secondCounter.innerText = 0;
+	minuteCounter.innerText = 0;
+}
 
 
 /*
@@ -137,7 +146,17 @@ restart.addEventListener('click',function(){
  const modal = document.querySelector('.modal');
  const span = document.querySelector('.close');
  const x = document.getElementById("myBtn");
- x.addEventListener('click',function(){
+ const yes = document.querySelector('.play-again');
+ const no = document.querySelector('.dont-play-again');
+ 
+ yes.addEventListener('click', function(){
+	 playAgain();
+	 modal.style.display = "none";
+ });
+ no.addEventListener('click', function(){
+	 modal.style.display = "none";
+ });
+ x.addEventListener('click', function(){
 	 modal.style.display = "block";
  });
  
