@@ -16,6 +16,10 @@ const testing1 = document.querySelector('.deck');
 
 function flipCard(card){                  //flip card function
 	card.target.className = 'card open show';
+	if(firstClick){
+		timerId = setInterval(startTimer, 1000); //id for clearInterval and sets interval to 1 second
+		firstClick = false;
+	}
 }
 
 function addCardToList(card, list){       //adding card to the list function
@@ -97,7 +101,10 @@ function startTimer(){
 	}
 }
 
-let timerId = setInterval(startTimer, 1000); //id for clearInterval and sets interval to 1 second
+//start timer test
+let timerId = 0;
+let firstClick = true;
+
 deckShuffle(cardsFace, newDeck);
  
 function deckShuffle(cardList, deckArray){
@@ -107,7 +114,7 @@ function deckShuffle(cardList, deckArray){
 		deckArray[i].className = 'card';
 	}
 }
-	
+
 
 
 //restart logic
@@ -128,6 +135,11 @@ function playAgain(){
 	matchCounter = 0;
 	secondCounter.innerText = 0;
 	minuteCounter.innerText = 0;
+	matchCheck = [];
+	if(!firstClick){
+		clearInterval(timerId);
+		firstClick = true;
+	}
 }
 
 
@@ -153,11 +165,9 @@ function playAgain(){
 	 playAgain();
 	 modal.style.display = "none";
  });
+ 
  no.addEventListener('click', function(){
 	 modal.style.display = "none";
- });
- x.addEventListener('click', function(){
-	 modal.style.display = "block";
  });
  
  span.addEventListener('click',function(){
