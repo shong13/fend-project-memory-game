@@ -33,6 +33,7 @@ function cardsMatch(card, list, moveCounter){
 		}
 		moveCounter.innerText++;
 		matchCounter++;
+		starScore();
 	}
 }
 
@@ -42,13 +43,17 @@ function cardsNotMatch(card, list, moveCounter){
 			list.pop().parentElement.className = 'card';
 		}
 		moveCounter.innerText++;
+		starScore();
 	}	
 }
 
+let scoreMessage = document.querySelector('.score-board');
 function endGame(){
 	if(matchCounter === 8){
 		clearInterval(timerId);
 		modal.style.display = "block";
+		scoreMessage.style.textAlign = "center";
+		scoreMessage.innerText = moveCount.innerText + " Moves " + "::" + " Time: " + minuteCounter.innerText + ":" + secondCounter.innerText + " ::" + " Star rating: " + stars.childElementCount;
 	}
 }
 
@@ -66,7 +71,6 @@ testing1.addEventListener('click', function(card) {
 		addCardToList(card, matchCheck);
 		cardsMatch(card, matchCheck, moveCount);
 		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
-		starScore();
 		tooManyCardsBugFix(matchCheck);
 		setTimeout(endGame, 100);
 	}
@@ -189,10 +193,10 @@ function playAgain(){
  //star function test
  const stars = document.querySelector('.stars');
  function starScore (){
-	if(moveCount.innerText == 1){
+	if(moveCount.innerText == 15){
 		stars.removeChild(stars.childNodes[1]);
 	}
-	if(moveCount.innerText == 2){
+	if(moveCount.innerText == 25){
 		stars.removeChild(stars.childNodes[2]);
 	}
  }
