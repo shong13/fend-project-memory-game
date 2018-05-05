@@ -145,6 +145,9 @@ function playAgain(){
 		clearInterval(timerId);
 		firstClick = true;
 	}
+	if(stars.childElementCount != 3){
+		stars.innerHTML = ' <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>'
+	}
 }
 
 
