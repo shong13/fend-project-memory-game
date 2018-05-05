@@ -141,8 +141,9 @@ h1 {
 
 .play-again {
 	font-size: 24px;
-	margin-left: 35%;
+	display: inline-block;
 	border-radius: 12px;
+	margin-left: 43%
 }
 
 .play-again:hover,
@@ -152,8 +153,9 @@ h1 {
 
 .dont-play-again {
 	font-size: 24px;
-	margin-left: 15%;
+	display: inline-block;
 	border-radius: 12px;
+	margin-left: 5%
 }
 
 .dont-play-again:hover,

@@ -47,8 +47,8 @@ function cardsNotMatch(card, list, moveCounter){
 
 function endGame(){
 	if(matchCounter === 8){
-		alert("You won!");
 		clearInterval(timerId);
+		modal.style.display = "block";
 	}
 }
 
@@ -66,6 +66,7 @@ testing1.addEventListener('click', function(card) {
 		addCardToList(card, matchCheck);
 		cardsMatch(card, matchCheck, moveCount);
 		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
+		starScore();
 		tooManyCardsBugFix(matchCheck);
 		setTimeout(endGame, 100);
 	}
@@ -161,6 +162,9 @@ function playAgain(){
  const yes = document.querySelector('.play-again');
  const no = document.querySelector('.dont-play-again');
  
+ x.addEventListener('click', function(){
+	 modal.style.display = "block";
+ });
  yes.addEventListener('click', function(){
 	 playAgain();
 	 modal.style.display = "none";
@@ -179,4 +183,16 @@ function playAgain(){
 		 modal.style.display = "none";
 	 }
  });
+ 
  //testing modal
+ 
+ //star function test
+ const stars = document.querySelector('.stars');
+ function starScore (){
+	if(moveCount.innerText == 1){
+		stars.removeChild(stars.childNodes[1]);
+	}
+	if(moveCount.innerText == 2){
+		stars.removeChild(stars.childNodes[2]);
+	}
+ }
