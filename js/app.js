@@ -13,7 +13,9 @@ let secondCounter = document.querySelector('.second'); //counts the seconds spen
 let minuteCounter = document.querySelector('.minute'); //counts the minutes spent
 let scoreMessage = document.querySelector('.score-board'); //It'll add a score message with moves made, time, and star rating
 const restart = document.querySelector('.restart'); //selects the restart button to add "restart" function
-const testing1 = document.querySelector('.deck');
+const everyCard = document.querySelector('.deck');
+let timerId = 0;	//to hold timer ID in order to use clearInterval() function
+let firstClick = true;		//in order to start a timer instead of having the timer run automatically from the start
 
 function flipCard(card){                  //flip card function
 	card.target.className = 'card open show';
@@ -65,7 +67,7 @@ function tooManyCardsBugFix(list){//test function to fix a bug where cards are c
 	}
 }
 
-testing1.addEventListener('click', function(card) {		//adds event listener to all the cards
+everyCard.addEventListener('click', function(card) {		//adds event listener to all the cards
 	if(card.target && card.target.className === 'card'){
 		flipCard(card);
 		addCardToList(card, matchCheck);
@@ -105,10 +107,6 @@ function startTimer(){		//timer to count seconds, and when seconds hit 60, incre
 		secondCounter.innerText = 0;
 	}
 }
-
-//start timer test
-let timerId = 0;	//to hold timer ID in order to use clearInterval() function
-let firstClick = true;		//in order to start a timer instead of having the timer run automatically from the start
 
 deckShuffle(cardsFace, newDeck);
  
@@ -155,8 +153,7 @@ function playAgain(){		//resets everything and reshuffles the cards.
 
  //testing modal
  const modal = document.querySelector('.modal'); //modal layout
- const span = document.querySelector('.close');
- const x = document.getElementById("myBtn");
+ const x = document.getElementById("myBtn");	//test to check on modal without finishing the game
  const yes = document.querySelector('.play-again'); //yes button to play again
  const no = document.querySelector('.dont-play-again'); //no button to close the modal
  
@@ -171,18 +168,6 @@ function playAgain(){		//resets everything and reshuffles the cards.
  no.addEventListener('click', function(){	//it's just used to close the modal
 	 modal.style.display = "none";
  });
- 
- span.addEventListener('click',function(){
-	 modal.style.display = "none";
- });
- 
- window.addEventListener('click',function(event){	
-	 if(event.target == modal) {
-		 modal.style.display = "none";
-	 }
- });
- 
- //testing modal
  
  //star function test
  const stars = document.querySelector('.stars'); //for star rating
