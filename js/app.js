@@ -3,15 +3,16 @@
  */
 let cardsFace = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 
 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 
-'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
+'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];//all the cards to be shuffled
 
-let matchCheck = [];
-let newDeck = document.querySelectorAll('.deck li');
-let moveCount = document.querySelector('.moves');
-let matchCounter = 0;
-let secondCounter = document.querySelector('.second');
-let minuteCounter = document.querySelector('.minute');
-const restart = document.querySelector('.restart');
+let matchCheck = []; //array to hold cards selected
+let newDeck = document.querySelectorAll('.deck li'); //holds the new shuffled cards
+let moveCount = document.querySelector('.moves'); //counts the moves
+let matchCounter = 0; //counts the match
+let secondCounter = document.querySelector('.second'); //counts the seconds spent
+let minuteCounter = document.querySelector('.minute'); //counts the minutes spent
+let scoreMessage = document.querySelector('.score-board'); //It'll add a score message with moves made, time, and star rating
+const restart = document.querySelector('.restart'); //selects the restart button to add "restart" function
 const testing1 = document.querySelector('.deck');
 
 function flipCard(card){                  //flip card function
@@ -26,7 +27,7 @@ function addCardToList(card, list){       //adding card to the list function
 	list.push(card.target.firstElementChild);
 }
 
-function cardsMatch(card, list, moveCounter){
+function cardsMatch(card, list, moveCounter){		//check the array for a match when 2 cards are in the array
 	if(list.length === 2 && list[0].className === list[1].className){
 		while(list.length > 0){
 			list.pop().parentElement.className = 'card match';
@@ -37,7 +38,7 @@ function cardsMatch(card, list, moveCounter){
 	}
 }
 
-function cardsNotMatch(card, list, moveCounter){
+function cardsNotMatch(card, list, moveCounter){		//check the array for a match when 2 cards are in the array
 	if(list.length === 2 && list[0].className !== list[1].className){
 		while(list.length > 0){
 			list.pop().parentElement.className = 'card';
@@ -47,8 +48,7 @@ function cardsNotMatch(card, list, moveCounter){
 	}	
 }
 
-let scoreMessage = document.querySelector('.score-board');
-function endGame(){
+function endGame(){		//when all cards get matched, ends the game
 	if(matchCounter === 8){
 		clearInterval(timerId);
 		modal.style.display = "block";
@@ -65,7 +65,7 @@ function tooManyCardsBugFix(list){//test function to fix a bug where cards are c
 	}
 }
 
-testing1.addEventListener('click', function(card) { 
+testing1.addEventListener('click', function(card) {		//adds event listener to all the cards
 	if(card.target && card.target.className === 'card'){
 		flipCard(card);
 		addCardToList(card, matchCheck);
@@ -84,7 +84,7 @@ testing1.addEventListener('click', function(card) {
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
+function shuffle(array) {		
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -98,7 +98,7 @@ function shuffle(array) {
     return array;
 }
 //timer logic
-function startTimer(){
+function startTimer(){		//timer to count seconds, and when seconds hit 60, increments minute and reset second to 0
 	secondCounter.innerText++;
 	if(secondCounter.innerText === "60"){
 		minuteCounter.innerText++;
@@ -107,12 +107,12 @@ function startTimer(){
 }
 
 //start timer test
-let timerId = 0;
-let firstClick = true;
+let timerId = 0;	//to hold timer ID in order to use clearInterval() function
+let firstClick = true;		//in order to start a timer instead of having the timer run automatically from the start
 
 deckShuffle(cardsFace, newDeck);
  
-function deckShuffle(cardList, deckArray){
+function deckShuffle(cardList, deckArray){		//shuffles the cards and put them back in the deck
 	cardList = shuffle(cardList);
 	for(let i = 0; i < deckArray.length; i++){
 		deckArray[i].firstElementChild.className = cardList[i];
@@ -124,17 +124,8 @@ function deckShuffle(cardList, deckArray){
 
 //restart logic
 restart.addEventListener('click', playAgain);
-	/*
-	deckShuffle(cardsFace, newDeck);
-	moveCount.innerText = 0;
-	matchCounter = 0;
-	//timer logic
-	secondCounter.innerText = 0;
-	minuteCounter.innerText = 0;
-	*/
 
-
-function playAgain(){
+function playAgain(){		//resets everything and reshuffles the cards.
 	deckShuffle(cardsFace, newDeck);
 	moveCount.innerText = 0;
 	matchCounter = 0;
@@ -163,21 +154,21 @@ function playAgain(){
  */
 
  //testing modal
- const modal = document.querySelector('.modal');
+ const modal = document.querySelector('.modal'); //modal layout
  const span = document.querySelector('.close');
  const x = document.getElementById("myBtn");
- const yes = document.querySelector('.play-again');
- const no = document.querySelector('.dont-play-again');
+ const yes = document.querySelector('.play-again'); //yes button to play again
+ const no = document.querySelector('.dont-play-again'); //no button to close the modal
  
  x.addEventListener('click', function(){
 	 modal.style.display = "block";
  });
- yes.addEventListener('click', function(){
+ yes.addEventListener('click', function(){	//adds playAgain() function to the yes button
 	 playAgain();
 	 modal.style.display = "none";
  });
  
- no.addEventListener('click', function(){
+ no.addEventListener('click', function(){	//it's just used to close the modal
 	 modal.style.display = "none";
  });
  
@@ -185,7 +176,7 @@ function playAgain(){
 	 modal.style.display = "none";
  });
  
- window.addEventListener('click',function(event){
+ window.addEventListener('click',function(event){	
 	 if(event.target == modal) {
 		 modal.style.display = "none";
 	 }
@@ -194,12 +185,12 @@ function playAgain(){
  //testing modal
  
  //star function test
- const stars = document.querySelector('.stars');
- function starScore (){
+ const stars = document.querySelector('.stars'); //for star rating
+ function starScore (){		//if moveCount is 15, one star will disappear
 	if(moveCount.innerText == 15){
 		stars.removeChild(stars.childNodes[1]);
 	}
-	if(moveCount.innerText == 25){
+	if(moveCount.innerText == 25){ //if moveCount is 25, second star will disappear
 		stars.removeChild(stars.childNodes[2]);
 	}
  }
