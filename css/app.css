@@ -146,8 +146,7 @@ h1 {
 	font-size: 12px;
 	display: inline-block;
 	border-radius: 12px;
-	margin-left: 43%;
-	
+	margin-right: 20%;
 }
 
 .play-again:hover,
@@ -159,7 +158,6 @@ h1 {
 	font-size: 12px;
 	display: inline-block;
 	border-radius: 12px;
-	margin-left: 5%;
 }
 
 .dont-play-again:hover,
@@ -179,6 +177,12 @@ h1 {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.buttons {
+	display: flex;
+	width: 100%;
+	justify-content: center;
 }
 /*testing modal */
 
