@@ -17,6 +17,13 @@ const everyCard = document.querySelector('.deck');
 let timerId = 0;	//to hold timer ID in order to use clearInterval() function
 let firstClick = true;		//in order to start a timer instead of having the timer run automatically from the start
 
+//variables for modal related stuff
+const modal = document.querySelector('.modal'); //modal layout
+//const x = document.getElementById("myBtn");	//test to check on modal without finishing the game
+const yes = document.querySelector('.play-again'); //yes button to play again
+const no = document.querySelector('.dont-play-again'); //no button to close the modal
+//variables for modal related stuff
+
 function flipCard(card){                  //flip card function
 	card.target.className = 'card open show';
 	if(firstClick){
@@ -67,24 +74,6 @@ function tooManyCardsBugFix(list){//test function to fix a bug where cards are c
 	}
 }
 
-everyCard.addEventListener('click', function(card) {		//adds event listener to all the cards
-	if(card.target && card.target.className === 'card'){
-		flipCard(card);
-		addCardToList(card, matchCheck);
-		cardsMatch(card, matchCheck, moveCount);
-		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
-		tooManyCardsBugFix(matchCheck);
-		setTimeout(endGame, 100);
-	}
-});
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {		
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -99,6 +88,7 @@ function shuffle(array) {
 
     return array;
 }
+
 //timer logic
 function startTimer(){		//timer to count seconds, and when seconds hit 60, increments minute and reset second to 0
 	secondCounter.innerText++;
@@ -108,8 +98,6 @@ function startTimer(){		//timer to count seconds, and when seconds hit 60, incre
 	}
 }
 
-deckShuffle(cardsFace, newDeck);
- 
 function deckShuffle(cardList, deckArray){		//shuffles the cards and put them back in the deck
 	cardList = shuffle(cardList);
 	for(let i = 0; i < deckArray.length; i++){
@@ -117,11 +105,6 @@ function deckShuffle(cardList, deckArray){		//shuffles the cards and put them ba
 		deckArray[i].className = 'card';
 	}
 }
-
-
-
-//restart logic
-restart.addEventListener('click', playAgain);
 
 function playAgain(){		//resets everything and reshuffles the cards.
 	deckShuffle(cardsFace, newDeck);
@@ -139,37 +122,7 @@ function playAgain(){		//resets everything and reshuffles the cards.
 	}
 }
 
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
- //testing modal
- const modal = document.querySelector('.modal'); //modal layout
- const x = document.getElementById("myBtn");	//test to check on modal without finishing the game
- const yes = document.querySelector('.play-again'); //yes button to play again
- const no = document.querySelector('.dont-play-again'); //no button to close the modal
- 
- x.addEventListener('click', function(){
-	 modal.style.display = "block";
- });
- yes.addEventListener('click', function(){	//adds playAgain() function to the yes button
-	 playAgain();
-	 modal.style.display = "none";
- });
- 
- no.addEventListener('click', function(){	//it's just used to close the modal
-	 modal.style.display = "none";
- });
- 
- //star function test
+//star function test
  const stars = document.querySelector('.stars'); //for star rating
  function starScore (){		//if moveCount is 15, one star will disappear
 	if(moveCount.innerText == 15){
@@ -179,3 +132,33 @@ function playAgain(){		//resets everything and reshuffles the cards.
 		stars.removeChild(stars.childNodes[2]);
 	}
  }
+
+ everyCard.addEventListener('click', function(card) {		//adds event listener to all the cards
+	if(card.target && card.target.className === 'card'){
+		flipCard(card);
+		addCardToList(card, matchCheck);
+		cardsMatch(card, matchCheck, moveCount);
+		setTimeout(cardsNotMatch, 800, card, matchCheck, moveCount);
+		tooManyCardsBugFix(matchCheck);
+		setTimeout(endGame, 100);
+	}
+});
+
+ //modal
+ /*
+ x.addEventListener('click', function(){
+	 modal.style.display = "block";
+ });
+ */
+ yes.addEventListener('click', function(){	//adds playAgain() function to the yes button
+	 playAgain();
+	 modal.style.display = "none";
+ });
+ 
+ no.addEventListener('click', function(){	//it's just used to close the modal
+	 modal.style.display = "none";
+ });
+ 
+ deckShuffle(cardsFace, newDeck);
+ 
+ restart.addEventListener('click', playAgain);
