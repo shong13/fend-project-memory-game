@@ -186,8 +186,8 @@ h1 {
 }
 /*testing modal */
 
-/*tablet and pc*/
-@media (min-device-width: 767px) {
+
+@media (min-device-width: 767px) and (max-device-width: 1023px) {
 	.deck {
 		width: 660px;
 		min-height: 680px;
@@ -200,27 +200,62 @@ h1 {
 	}
 
 	.deck .card.show {
-		font-size: 33px;
+		font-size: 40px;
 	}
 	
 	.deck .card.match {
-		font-size: 33px;
+		font-size: 40px;
 	}
 	
-	.score-panel {
-		width: 345px;
-	}	
-}
 	.winning-message {
 		font-size: 30px;
 		text-align: center;
 	}
 
 	.play-again {
-		font-size: 24px;
+		font-size: 30px;
 	}
 
 	.dont-play-again {
-		font-size: 24px;
+		font-size: 30px;
+	}
+
+	header {
+		font-size: 32px;
+	}
+	
+	.score-panel {
+		width: 500px;
+		font-size: 23px;
+	}
+}
+
+@media (min-device-width: 1024px) {
+	.deck {
+		width: 900px;
+		min-height: 900px;
+		padding: 40px;
+	}
+	
+	.deck .card {
+		height: 180px;
+		width: 180px;
+	}
+	
+	header {
+		font-size: 40px;
+	}
+	
+	.score-panel {
+		width: 600px;
+		font-size: 30px;
+	}
+	
+	.deck .card.show {
+		font-size: 60px;
+	}
+
+	.deck .card.match {
+		font-size: 60px;
 	}
 }
