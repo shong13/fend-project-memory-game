@@ -4,9 +4,17 @@ A classic card matching memory game. In order to win, match all 8 sets of cards.
 
 ## Table of Contents
 
+* [Dependencies](#dependencies)
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 * [Bugs](#bugs)
+
+
+## Dependencies
+
+The game uses outside library sources:
+https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css
+https://fonts.googleapis.com/css?family=Coda
 
 ## Instructions
 
