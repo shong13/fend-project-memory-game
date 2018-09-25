@@ -28,7 +28,7 @@ function flipCard(card){                  //flip card function
 	card.target.className = 'card open show';
 	if(firstClick){
 		timerId = setInterval(startTimer, 1000); //id for clearInterval and sets interval to 1 second
-		firstClick = false;
+		firstClick = false; //have the game initialize with firstClick to be false so the game would start once a card has been clicked.
 	}
 }
 
@@ -37,35 +37,38 @@ function addCardToList(card, list){       //adding card to the list function
 }
 
 function cardsMatch(card, list, moveCounter){		//check the array for a match when 2 cards are in the array
-	if(list.length === 2 && list[0].className === list[1].className){
+	if(list.length === 2 && list[0].className === list[1].className){ //check if the cards holding array has 2 elements and if the two are the same
 		while(list.length > 0){
-			list.pop().parentElement.className = 'card match';
+			list.pop().parentElement.className = 'card match'; //loop through the array and set the parent element to have card match class
 		}
-		moveCounter.innerText++;
-		matchCounter++;
-		starScore();
+		moveCounter.innerText++; //moveCounter increments
+		matchCounter++; //matchCounter increments
+		starScore(); //check number of moves and deduct stars accordingly
 	}
 }
 
 function cardsNotMatch(card, list, moveCounter){		//check the array for a match when 2 cards are in the array
-	if(list.length === 2 && list[0].className !== list[1].className){
+	if(list.length === 2 && list[0].className !== list[1].className){ //checks the array for 2 cards and if the cards are different
 		while(list.length > 0){
-			list.pop().parentElement.className = 'card';
+			list.pop().parentElement.className = 'card'; //loop through the array and sets the cards back to card class
 		}
-		moveCounter.innerText++;
-		starScore();
+		moveCounter.innerText++; //moveCounter increments
+		starScore(); //check number of moves and deduct stars accordingly
 	}	
 }
 
 function endGame(){		//when all cards get matched, ends the game
 	if(matchCounter === 8){
-		clearInterval(timerId);
-		modal.style.display = "block";
+		clearInterval(timerId); //timer stops
+		modal.style.display = "block"; //displays modal that contains the results of the game
 		scoreMessage.style.textAlign = "center";
 		scoreMessage.innerText = moveCount.innerText + " Moves " + "::" + " Time: " + minuteCounter.innerText + ":" + secondCounter.innerText + " ::" + " Star rating: " + stars.childElementCount;
 	}
 }
 
+//There was a bug where if too many cards are clicked in rapid succession, the game won't function normally
+//In order to prevent too many cards from entering the holding array and end up bugging up the game
+//I implemented this to check the holding array and put all the cards in the said array back to face down position
 function tooManyCardsBugFix(list){//test function to fix a bug where cards are clicked too fast
 	if(list.length > 2){
 		while(list.length > 0){
@@ -93,7 +96,7 @@ function shuffle(array) {
 function startTimer(){		//timer to count seconds, and when seconds hit 60, increments minute and reset second to 0
 	secondCounter.innerText++;
 	if(secondCounter.innerText === "60"){
-		minuteCounter.innerText++;
+		minuteCounter.innerText++; //once the secondCounter reaches 60, increment a minuteCounter and reset secondCounter to 0
 		secondCounter.innerText = 0;
 	}
 }
